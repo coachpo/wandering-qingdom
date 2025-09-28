@@ -1,0 +1,17 @@
+/* TEAM */
+Developer: Your Name
+Contact: hello@wandering-qingdom.example.com
+Location: Your Location
+
+/* THANKS */
+Framework: Astro
+UI Framework: Tailwind CSS
+Fonts: Inter, Anton, Lato
+Icons: Custom SVG icons
+
+/* SITE */
+Last update: 2025/01/01
+Language: English
+Doctype: HTML5
+IDE: Cursor / VS Code
+Standards: HTML5, CSS3, JavaScript ES6+

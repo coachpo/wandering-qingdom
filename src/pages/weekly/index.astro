@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import List from "../../components/List.astro";
+import { extraList } from "../../utils/content";
+
+const blogList = extraList(await getCollection('post', ({ id }) => id.startsWith('weekly/')));
+
+const description = 'Short weekly notes and links I find useful or interesting.';
+---
+
+<Layout title="Weekly - Wandering Qingdom" description={description}>
+  <div class="pt-10 pb-6 px-3">
+    <h1 class="flex flex-col font-lato font-bold text-3xl text-black leading-normal tracking-wider">
+      Weekly
+    </h1>
+    <p class="mt-4 text-gray-600 text-sm leading-relaxed">
+      {description}
+    </p>
+  </div>
+  <List data={blogList} />
+</Layout>

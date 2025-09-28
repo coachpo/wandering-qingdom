@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Social from '../components/Social.astro';
+import List from '../components/List.astro';
+import { extraList } from '../utils/content';
+import ArrowUpRightIcon from '../assets/arrow-up-right.svg';
+
+
+const weeklyList = extraList(await getCollection('post', ({ id }) => id.startsWith('weekly/')), 5);
+const blogList = extraList(await getCollection('post', ({ id }) => id.startsWith('blog/')), 5);
+---
+
+<Layout>
+  <div class="pt-10 pb-6 px-3">
+    <div class="flex items-start space-x-4">
+      <div class="flex-1">
+        <h1 class="flex flex-col font-anton text-3xl text-black leading-normal tracking-wider">
+          <span>Welcome to</span>
+          <span>Wandering Qingdom</span>
+        </h1>
+        <div class="mt-6 text-gray-900 space-y-1.5">
+          <p>A clean Astro starter for personal blogs.</p>
+        </div>
+      </div>
+    </div>
+    <Social />
+  </div>
+
+  <div class="mt-8">
+    <div class="flex items-center justify-between px-3">
+      <h2 class="font-medium text-xl text-gray-800">Weekly</h2>
+      <a
+        class="text-gray-400 transition-colors hover:text-gray-600"
+        href="/weekly"
+        title="View all"
+        aria-label="View all"
+      >
+        <ArrowUpRightIcon width="20" height="20" />
+      </a>
+    </div>
+    <List data={weeklyList} className="mt-4" />
+  </div>
+
+  <div class="mt-8">
+    <div class="flex items-center justify-between px-3">
+      <h2 class="font-medium text-xl text-gray-800">Blog</h2>
+      <a
+        class="text-gray-400 transition-colors hover:text-gray-600"
+        href="/blog"
+        title="View all"
+        aria-label="View all"
+      >
+        <ArrowUpRightIcon width="20" height="20" />
+      </a>
+    </div>
+    <List data={blogList} className="mt-4" />
+  </div>
+</Layout>

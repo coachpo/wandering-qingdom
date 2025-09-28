@@ -1,0 +1,61 @@
+---
+import Menu from '../components/Menu.astro';
+import Footer from '../components/Footer.astro';
+
+import '../styles/global.css';
+import '@fontsource-variable/inter';
+import '@fontsource/anton';
+import '@fontsource/lato/700.css';
+
+import inter from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import anton from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
+import lato from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+	keywords?: string;
+}
+
+const {
+	title = 'Wandering Qingdom',
+	description = 'A minimal personal blog template built with Astro + Tailwind',
+	keywords = 'Wandering Qingdom, blog, template, astro, tailwind',
+} = Astro.props;
+---
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="Wandering Qingdom" />
+		
+		<!-- Favicon and icons -->
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		
+		<!-- Web App Manifest -->
+		<link rel="manifest" href="/manifest.json" />
+		
+		<!-- Browser config for Windows tiles -->
+		<meta name="msapplication-config" content="/browserconfig.xml" />
+		
+		<!-- Theme colors -->
+		<meta name="theme-color" content="#000000" />
+		<meta name="msapplication-TileColor" content="#000000" />
+		
+		<title>{title}</title>
+		<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={inter} />
+		<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={anton} />
+		<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={lato} />
+	</head>
+	<body class="max-w-3xl mx-auto px-2">
+		<Menu />
+		<slot />
+		<Footer />
+	</body>
+</html>

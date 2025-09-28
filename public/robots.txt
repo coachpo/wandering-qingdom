@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://wandering-qingdom.example.com/sitemap-index.xml
+
+# Block crawlers from common admin/private areas
+Disallow: /api/
+Disallow: /.well-known/
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all other content
+Allow: /blog/
+Allow: /weekly/
+Allow: /static/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

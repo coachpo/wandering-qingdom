@@ -1,0 +1,6 @@
+Contact: mailto:security@wandering-qingdom.example.com
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: https://wandering-qingdom.example.com/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://wandering-qingdom.example.com/.well-known/security.txt
+Policy: https://wandering-qingdom.example.com/security-policy
