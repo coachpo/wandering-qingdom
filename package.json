@@ -18,5 +18,8 @@
     "date-fns": "^4.1.0",
     "rehype-external-links": "^3.0.0",
     "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }
