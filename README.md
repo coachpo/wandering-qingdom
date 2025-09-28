@@ -138,3 +138,8 @@ The site is a static build by default and can be deployed to any static host.
 
 - This template intentionally ships without personal content or analytics
 - Add your own posts under `content/` when you’re ready
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
