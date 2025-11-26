@@ -1,145 +1,91 @@
 # Wandering Qingdom
 
-A clean, minimal personal blog template built with Astro 5 and Tailwind CSS 4.
-
-It ships with a simple content model, accessible typography, and zero personal data. Use it as a starting point for your own blog or weekly notes site.
+A minimal, no-tracking starter for personal blogs and weekly notes built with Astro 5 and Tailwind CSS 4.
 
 ## Features
-
-- Minimal Astro setup with Tailwind 4 and `@tailwindcss/typography`
-- Markdown content via Astro Content Collections (`content/blog`, `content/weekly`)
-- Automatic sitemap generation (`@astrojs/sitemap`)
-- Sensible SEO defaults in a shared layout
-- Reusable `Social` component with optional links (GitHub, X, Email, WeChat QR)
-- Clean list pages and post pages with date formatting
-- No third-party analytics by default
+- Markdown content via Astro Content Collections stored under `content/blog` and `content/weekly`.
+- Tailwind 4 + `@tailwindcss/typography` and preloaded Inter/Anton/Lato fonts for crisp typography.
+- Shared layout with sensible SEO meta, Shiki code highlighting (GitHub Dark), and external-link hardening (`noopener`, `noreferrer`, `nofollow`).
+- Reusable `Social` component (GitHub, X, email, optional WeChat QR modal) and badge-style `Menu` with avatar + nav links.
+- Date-sorted list views and clean post pages powered by a small helper in `src/utils/content.ts`.
+- Automatic sitemap generation; static output suitable for any static host.
 
 ## Tech Stack
-
-- Astro 5
-- Tailwind CSS 4
+- Astro 5.11
+- Tailwind CSS 4 (`@tailwindcss/vite`, `@tailwindcss/typography`)
 - date-fns
+- rehype-external-links
+
+## Requirements
+- Node.js 18+
+- pnpm (recommended) or npm/yarn
+
+## Quick Start
+```bash
+pnpm install
+pnpm dev
+# visit http://localhost:4321
+```
+
+## Scripts
+- `pnpm dev` - start dev server
+- `pnpm build` - production build to `dist/`
+- `pnpm preview` - preview the build locally
 
 ## Project Structure
-
 ```
 .
-├─ public/                # Static assets (served at site root)
-├─ content/               # Markdown content (blog, weekly)
+├─ public/                 # Static assets (favicons, manifest, robots, avatar)
+├─ content/                # Your markdown posts
 │  ├─ blog/
 │  └─ weekly/
 ├─ src/
-│  ├─ assets/            # SVG icons used by components
-│  ├─ components/        # UI components (Menu, Social, Footer, List)
-│  ├─ layouts/           # Shared page layout
-│  ├─ pages/             # Astro pages (/, /blog, /weekly)
-│  ├─ styles/            # Tailwind + global styles
-│  └─ utils/             # Helpers (content list sorting)
-├─ src/content.config.ts  # Content collections & schema
-├─ astro.config.mjs       # Astro configuration
+│  ├─ assets/              # SVG icons
+│  ├─ components/          # Menu, Social, Footer, List
+│  ├─ layouts/             # Shared page shell + meta
+│  ├─ pages/               # /, /blog, /weekly, and post routes
+│  ├─ styles/              # Tailwind setup + global tweaks
+│  └─ utils/               # Content sorting helper
+├─ src/content.config.ts   # Content collections + schema
+├─ astro.config.mjs        # Astro + sitemap + rehype config
 ├─ package.json
 └─ tsconfig.json
 ```
 
 ## Content Model
-
-Content is defined in `src/content.config.ts` and loaded from the `content/` directory.
-
-Frontmatter schema for posts:
+Defined in `src/content.config.ts` (collection key: `post`). Frontmatter for each markdown file:
 
 ```md
 ---
-title: My First Post           # string (required)
-date: 2025-01-01               # date (required)
-description: A short summary.  # string (required)
-tags: [note, learning]         # string[] (optional)
+title: Example Post          # string, required
+date: 2025-01-01             # date, required
+description: Short summary.  # string, required
+tags: [note, learning]       # string[], optional
 ---
 
-Markdown body goes here.
+Markdown body here.
 ```
 
-Add files into:
-
-- `content/blog/your-post.md`
+Place files under:
+- `content/blog/my-post.md`
 - `content/weekly/issue-1.md`
 
-## Configuration
+Dates are timezone-shifted by 8 hours to display consistently.
 
-- `astro.config.mjs`: set your site URL
-  ```js
-  export default defineConfig({
-    site: 'https://your-domain.com',
-    // ...
-  });
-  ```
-- `src/layouts/Layout.astro`: default `<title>`, description, and keywords
-- `src/components/Social.astro`: pass only the links you want to show
-  ```astro
-  ---
-  import Social from "../components/Social.astro";
-  ---
-  <Social
-    github="https://github.com/yourname"
-    x="https://x.com/yourname"
-    email="you@example.com"
-    wechatQrSrc="/static/wechat_qr.png"
-  />
-  ```
-- `src/components/Menu.astro`: the circular badge uses the `title` prop (defaults to `WQ`)
-  ```astro
-  <Menu title="WQ" />
-  ```
+## Customization Tips
+- **Site URL**: set `site` in `astro.config.mjs` for correct sitemap/meta.
+- **SEO defaults**: adjust title/description/keywords in `src/layouts/Layout.astro`.
+- **Social links**: pass props in `src/components/Social.astro` (supports GitHub, X, email, `wechatQrSrc` for modal QR).
+- **Menu badge & avatar**: update `title` prop and `public/avatar.png`.
+- **Styling**: tweak fonts/themes in `src/styles/global.css`; Tailwind 4 is already configured.
+- **Favicons & manifest**: replace assets in `public/` and update `manifest.json` if needed.
 
-## Development
-
-Prerequisites:
-
-- Node.js 18+
-- pnpm (recommended) or npm/yarn
-
-Install dependencies and start the dev server:
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Open `http://localhost:4321` in your browser.
-
-## Build & Preview
-
+## Build & Deployment
 ```bash
 pnpm build
 pnpm preview
 ```
-
-The site is a static build by default and can be deployed to any static host.
-
-## Deployment
-
-- Vercel: import the repo, framework = Astro
-- Netlify: use `pnpm build` and publish `dist/`
-- GitHub Pages: build in CI, deploy `dist/` to `gh-pages`
-
-## Repository
-
-- Repo: `git@github.com:coachpo/wandering-qingdom.git`
-- Default branch: `main`
-
-## Customization Checklist
-
-- Update `astro.config.mjs` with your domain
-- Replace favicon at `public/favicon.ico`
-- Set your social links via `Social` props
-- Adjust the text badge in `Menu` (`title` prop)
-- Tweak fonts in `src/layouts/Layout.astro` if desired
-
-## Notes
-
-- This template intentionally ships without personal content or analytics
-- Add your own posts under `content/` when you’re ready
-
+Outputs static files in `dist/`. Deploy to Vercel, Netlify, GitHub Pages, Cloudflare Pages, or any static host.
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License. See `LICENSE`.
